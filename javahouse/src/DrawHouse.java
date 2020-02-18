@@ -15,20 +15,34 @@ class MyCanvas extends JComponent {
 		
 		
 		// Front of roof
+		int xstri[] = {150, 250, 350};
+		int xytri[] = {150, 80, 150};
+		Polygon tri = new Polygon(xstri,xytri,3);
 		g.setColor(red);
-		Polygon tri = new Polygon();
-		tri.addPoint(100, 100);
-		tri.addPoint(150, 150);
-		tri.addPoint(50, 150);
+		g.fillPolygon(tri);
 		
+		// Side of roof
+		int xssidetri[] = {250,350,500,400};
+		int xysidetri[] = {80,150,120,50};
+		Polygon sidetri = new Polygon(xssidetri, xysidetri, 4);
+		g.setColor(darkred);
+		g.fillPolygon(sidetri);
+		
+		//Making side of building
+		int xsside[] = {350,350,500,500};
+		int xyside[] = {150,350,320,120};
+		Polygon side = new Polygon(xsside,xyside,4);
+		g.setColor(darkgreen);
+		g.fillPolygon(side);
+		
+		// House front
 		g.setColor(green);
 		g.fillRect(150, 150, 200, 200);
 		
+		// Sun
 		g.setColor(Color.yellow);
-		g.fillOval(240, 30, 50, 50);
+		g.fillOval(70, 30, 50, 50);
 		
-		g.setColor(Color.black);
-		g.fillRect(120, 55, 10, 30);
 	
 	}
 }
