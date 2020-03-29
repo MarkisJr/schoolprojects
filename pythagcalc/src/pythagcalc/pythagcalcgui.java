@@ -4,6 +4,7 @@ package pythagcalc;
 import java.awt.*;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.event.*;
 import java.lang.Math;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ class Window extends JPanel implements ActionListener
 	Label title, subtitle, rule;
 	TextField valuea, valueb, valuec;
 	Button calculate, reset;
+	JLabel triangle;
 	
 	//declaring variables
 	DecimalFormat df = new DecimalFormat("#.##");
@@ -31,6 +33,9 @@ class Window extends JPanel implements ActionListener
 		title = new Label("Please enter two seperate lengths of the right angle triangle");
 		subtitle = new Label("The unknown side will be calculated using:");
 		rule = new Label("The calculator will only function with integer and real numbers");
+		
+		//setting images to appropriate file
+		triangle.setIcon(new ImageIcon("triangle.png"));
 		
 		//setting size and text of textfields
 		valuea = new TextField(10);
@@ -47,6 +52,7 @@ class Window extends JPanel implements ActionListener
 		add(valuea);
 		add(valueb);
 		add(valuec);
+		add(triangle);
 		add(calculate);
 		add(reset);
 		add(rule);
@@ -129,6 +135,7 @@ class Window extends JPanel implements ActionListener
 				else if (hypot == false)
 				{
 					result = Math.sqrt(Math.pow(c, 2)-Math.pow(a, 2)+Math.pow(b, 2));
+
 					result = Double.valueOf(df.format(result));
 					
 					//printing to a
@@ -166,12 +173,19 @@ class Window extends JPanel implements ActionListener
 	} 
 }
 
-public class pythagcalcgui 
+public class pythagcalcgui
 {
+	
+	
+	
+	
 	//create panel for gui
 	public static void main(String[] args) 
 	{
 		Window importclass = new Window();
+		
+		importclass.setLayout(new BoxLayout(importclass, BoxLayout.PAGE_AXIS));
+		
 		importclass.init();
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
