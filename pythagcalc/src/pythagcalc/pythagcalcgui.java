@@ -69,15 +69,15 @@ class Window extends JPanel implements ActionListener
 			if (type == "Calculate")
 			{
 				//handling null
-				if (valuea.getText() == "")
+				if (valuea.getText().equals(""))
 				{
 					valuea.setText("0");
 				}
-				if (valueb.getText() == "")
+				if (valueb.getText().equals(""))
 				{
 					valueb.setText("0");
 				}
-				if (valuec.getText() == "")
+				if (valuec.getText().equals(""))
 				{
 					valuec.setText("0");
 				}
