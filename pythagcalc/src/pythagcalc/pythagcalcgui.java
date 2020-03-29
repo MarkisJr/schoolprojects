@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.JFrame;
 import java.awt.event.*;
 import java.lang.Math;
+import javax.swing.JOptionPane;
+import java.text.DecimalFormat;
 
 class Window extends JPanel implements ActionListener
 {
@@ -18,8 +20,9 @@ class Window extends JPanel implements ActionListener
 	Button calculate, reset;
 	
 	//declaring variables
-	public double a, b, c, result;
-	public boolean hypot;
+	DecimalFormat df = new DecimalFormat("#.##");
+	double a, b, c, result;
+	boolean hypot;
 	
 	//initialize
 	public void init()
@@ -41,12 +44,12 @@ class Window extends JPanel implements ActionListener
 		//adding components into the frame
 		add(title);
 		add(subtitle);
-		add(rule);
 		add(valuea);
 		add(valueb);
 		add(valuec);
 		add(calculate);
 		add(reset);
+		add(rule);
 		
 		//adding event for when the button is pressed
 		calculate.addActionListener(this);
@@ -59,25 +62,113 @@ class Window extends JPanel implements ActionListener
 		//determine which button has been pressed
 		String type = e.getActionCommand();
 		
-		//calculating the answer
-		if (type == "Calculate")
+		try 
 		{
-			//setting variables with data
-			if ( )
-		}
 		
-		//resetting the gui
-		if (type == "Reset")
-		{
+			//calculating the answer
+			if (type == "Calculate")
+			{
+				//handling null
+				if (valuea.getText() == "")
+				{
+					valuea.setText("0");
+				}
+				if (valueb.getText() == "")
+				{
+					valueb.setText("0");
+				}
+				if (valuec.getText() == "")
+				{
+					valuec.setText("0");
+				}
+				
+				//converting string to double
+				a = Double.parseDouble(valuea.getText());
+				b = Double.parseDouble(valueb.getText());
+				c = Double.parseDouble(valuec.getText());
 			
+				//check for negative numbers
+				if (a < 0 || b < 0 || c < 0)
+				{
+					JOptionPane.showMessageDialog(null, "A triangle cannot have negative lengths");
+					return;
+				}
+			
+				//what equation to be used
+				if (a != 0 && b != 0 && c == 0)
+				{
+					hypot=true;
+				}
+				else if (a != 0 && c != 0 && b == 0)
+				{
+					hypot=false;
+				}
+				else if (b != 0 && c != 0 && a == 0)
+				{
+					hypot=false;
+				}
+				
+				//checks if there have been three inputs
+				else
+				{
+					JOptionPane.showMessageDialog(null, "An invalied amount of values have been entered into the text fields");
+					return;
+				}
+				
+				//solving for the hypotenuse
+				if (hypot == true)
+				{
+					result = Math.hypot(a, b);
+					result = Double.valueOf(df.format(result));
+					
+					//printing to c
+					valuec.setText(String.valueOf(result));
+				}
+				
+				//solving for a or b
+				else if (hypot == false)
+				{
+					result = Math.sqrt(Math.pow(c, 2)-Math.pow(a, 2)+Math.pow(b, 2));
+					result = Double.valueOf(df.format(result));
+					
+					//printing to a
+					if (a == 0)
+					{
+						valuea.setText(String.valueOf(result));
+					}
+					
+					//printing to b
+					else if (b == 0)
+					{
+						valueb.setText(String.valueOf(result));
+					}
+				}	
+			}
+			
+			//resets the gui
+			if (type == "Reset")
+			{
+				
+			}
 		}
 		
+		//handles the error if a non number character is input into the fields
+		catch (NumberFormatException error)
+		{
+			JOptionPane.showMessageDialog(null, "The varriables can only contain integers and real numbers. Output: " + error.toString());
+		}
+		
+		//handles all errors that have no catch handling them and prints out the error for debug purposes
+		catch (Exception error)
+		{
+			JOptionPane.showMessageDialog(null, "An error occured. Output: " + error.toString());
+		}
 	} 
 }
 
 public class pythagcalcgui 
 {
-	//create gui
+	//create panel for gui
 	public static void main(String[] args) 
 	{
 		Window importclass = new Window();
@@ -85,7 +176,7 @@ public class pythagcalcgui
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		window.setBounds(30,30,300,300);
+		window.setBounds(30,30,600,300);
 		
 		window.getContentPane().add(importclass);
 		window.setVisible(true);
