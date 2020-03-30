@@ -16,7 +16,7 @@ class Window extends JPanel implements ActionListener
 	private static final long serialVersionUID = 1L;
 	
 	//declaring graphical elements of gui
-	Label title, subtitle, rule;
+	Label title, subtitle, rule, texta, textb, textc;
 	TextField valuea, valueb, valuec;
 	Button calculate, reset;
 	JLabel triangle;
@@ -33,14 +33,18 @@ class Window extends JPanel implements ActionListener
 		title = new Label("Please enter two seperate lengths of the right angle triangle");
 		subtitle = new Label("The unknown side will be calculated using:");
 		rule = new Label("The calculator will only function with integer and real numbers");
+		texta = new Label("a=");
+		textb = new Label("b=");
+		textc = new Label("c=");
 		
 		//setting images to appropriate file
+		triangle = new JLabel();
 		triangle.setIcon(new ImageIcon("triangle.png"));
 		
 		//setting size and text of textfields
-		valuea = new TextField(10);
-		valueb = new TextField(10);
-		valuec = new TextField(10);
+		valuea = new TextField(5);
+		valueb = new TextField(5);
+		valuec = new TextField(5);
 		
 		//setting text of buttons
 		calculate = new Button("Calculate");
@@ -49,8 +53,11 @@ class Window extends JPanel implements ActionListener
 		//adding components into the frame
 		add(title);
 		add(subtitle);
+		add(texta);
 		add(valuea);
+		add(textb);
 		add(valueb);
+		add(textc);
 		add(valuec);
 		add(triangle);
 		add(calculate);
@@ -96,7 +103,7 @@ class Window extends JPanel implements ActionListener
 				//check for negative numbers
 				if (a < 0 || b < 0 || c < 0)
 				{
-					JOptionPane.showMessageDialog(null, "A triangle cannot have negative lengths");
+					JOptionPane.showMessageDialog(null, "A triangle cannot have negative lengths.");
 					return;
 				}
 			
@@ -117,7 +124,7 @@ class Window extends JPanel implements ActionListener
 				//checks if there have been three inputs
 				else
 				{
-					JOptionPane.showMessageDialog(null, "An invalied amount of values have been entered into the text fields");
+					JOptionPane.showMessageDialog(null, "An invalied amount of values have been entered into the text fields, please reset to use the calculator again.");
 					return;
 				}
 				
@@ -134,6 +141,11 @@ class Window extends JPanel implements ActionListener
 				//solving for a or b
 				else if (hypot == false)
 				{
+					if (a+b > c)
+					{
+						JOptionPane.showMessageDialog(null, "The known side cannot be longer than the hypotenuse.");
+						return;
+					}
 					result = Math.sqrt(Math.pow(c, 2)-Math.pow(a, 2)+Math.pow(b, 2));
 
 					result = Double.valueOf(df.format(result));
@@ -155,14 +167,19 @@ class Window extends JPanel implements ActionListener
 			//resets the gui
 			if (type == "Reset")
 			{
-				
+				a = 0;
+				b = 0;
+				c = 0;
+				valuea.setText("");
+				valueb.setText("");
+				valuec.setText("");
 			}
 		}
 		
 		//handles the error if a non number character is input into the fields
 		catch (NumberFormatException error)
 		{
-			JOptionPane.showMessageDialog(null, "The varriables can only contain integers and real numbers. Output: " + error.toString());
+			JOptionPane.showMessageDialog(null, "The varriables can only contain integers and real numbers.");
 		}
 		
 		//handles all errors that have no catch handling them and prints out the error for debug purposes
@@ -175,17 +192,10 @@ class Window extends JPanel implements ActionListener
 
 public class pythagcalcgui
 {
-	
-	
-	
-	
 	//create panel for gui
 	public static void main(String[] args) 
 	{
 		Window importclass = new Window();
-		
-		importclass.setLayout(new BoxLayout(importclass, BoxLayout.PAGE_AXIS));
-		
 		importclass.init();
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
