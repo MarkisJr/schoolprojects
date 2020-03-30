@@ -41,7 +41,7 @@ class Window extends JPanel implements ActionListener
 		triangle = new JLabel();
 		triangle.setIcon(new ImageIcon("triangle.png"));
 		
-		//setting size and text of textfields
+		//setting size of textfields
 		valuea = new TextField(5);
 		valueb = new TextField(5);
 		valuec = new TextField(5);
@@ -81,7 +81,7 @@ class Window extends JPanel implements ActionListener
 			//calculating the answer
 			if (type == "Calculate")
 			{
-				//handling null
+				//handling empty string
 				if (valuea.getText().equals(""))
 				{
 					valuea.setText("0");
@@ -194,14 +194,19 @@ public class pythagcalcgui
 {
 	//create panel for gui
 	public static void main(String[] args) 
-	{
+	{		
 		Window importclass = new Window();
+		//calling initialize
 		importclass.init();
 		JFrame window = new JFrame();
+		
+		//naming the window
+		window.setTitle("Pythagorean Calculator");
+		//setting operation of the close button
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		//setting size of window
 		window.setBounds(30,30,600,300);
-		
+		//importing content pane
 		window.getContentPane().add(importclass);
 		window.setVisible(true);
 	}
