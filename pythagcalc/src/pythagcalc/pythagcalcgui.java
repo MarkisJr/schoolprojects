@@ -2,8 +2,6 @@ package pythagcalc;
 
 //importing libraries
 import java.awt.*;
-import javax.swing.JPanel;
-import javax.swing.JFrame;
 import javax.swing.*;
 import java.awt.event.*;
 import java.lang.Math;
