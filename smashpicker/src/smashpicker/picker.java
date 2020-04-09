@@ -2,6 +2,7 @@ package smashpicker;
 
 //libraries
 import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 import javax.swing.*;
 import javax.imageio.ImageIO;
@@ -20,7 +21,7 @@ class Window extends JPanel
 	public void init()
 	{
 		//for loop setting buttons and adding them to interface
-		for (int i=6; i>=1; i--)
+		for (int i=72; i>=1; i--)
 		{
 			int num = i;
 			//getting images
@@ -29,8 +30,8 @@ class Window extends JPanel
 			character = new ImageIcon(String.valueOf(i)+".png");
 			
 			//not gonna work :_(
-			File f = new File(String.valueOf(i)+".png");
-			Image img = ImageIO.read(f);
+			//File f = new File(String.valueOf(i)+".png");
+			//Image img = ImageIO.read(f);
 			
 			//creating button
 			button = new JToggleButton();
@@ -56,13 +57,13 @@ class Window extends JPanel
 								
 								darkcharacter = new ImageIcon(String.valueOf(num)+".png");
 								
-								for (int a=0; a<=button.getWidth(); a++)
-								{
-									for (int b=0; b<=button.getHeight(); b++)
-									{
+								//for (int a=0; a<=button.getWidth(); a++)
+								//{
+									//for (int b=0; b<=button.getHeight(); b++)
+									//{
 										
-									}
-								}
+									//}
+								//}
 							}
 							//if button is unselected (off)
 							if (button.isSelected() == false)
