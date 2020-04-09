@@ -3,76 +3,69 @@ package smashpicker;
 //libraries
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import javax.swing.*;
-import javax.imageio.ImageIO;
 
 //graphical class
 class Window extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	
-	//character button array
-	Icon character, darkcharacter;
-	JToggleButton button;
-	final float percentage = 0.5f;
-	int brightness = (int)(256-256*percentage);
+	//button state
+	boolean[] state = new boolean[80];
 	
 	public void init()
-	{
-		//for loop setting buttons and adding them to interface
-		for (int i=72; i>=1; i--)
+	{	
+		try 
 		{
-			int num = i;
-			//getting images
-
-			
-			character = new ImageIcon(String.valueOf(i)+".png");
-			
-			//not gonna work :_(
-			//File f = new File(String.valueOf(i)+".png");
-			//Image img = ImageIO.read(f);
-			
-			//creating button
-			button = new JToggleButton();
-			button.setPreferredSize(new Dimension(75,50));
-			button.setMargin(new Insets(0,0,0,0));
-			button.setBorder(null);
-			
-			//setting image to button
-			button.setIcon(character);
-			
-			//adding to window pane
-			add(button);
-			
-			//creating event handler for button
-			button.addActionListener(new ActionListener()
-				{
-					public void actionPerformed(ActionEvent e) 
+			for (int i=80-1; i>=0; i--)
+			{
+				//detecting iteration
+				int num = i;
+					
+				//creating button
+				JToggleButton button = new JToggleButton();
+				button.setPreferredSize(new Dimension(75,50));
+				button.setMargin(new Insets(0,0,0,0));
+				button.setBorder(null);
+					
+				//setting icon and creating dark icon
+				Icon character = new ImageIcon("characters/" + String.valueOf(i+1) + ".png");
+				Icon darker = new ImageIcon("darker/" + String.valueOf(i+1) + ".png");
+				button.setIcon(character);
+				
+				//adding to window pane
+				add(button);
+				
+				//creating event handler for button
+				button.addItemListener(new ItemListener()
+				{		
+					public void itemStateChanged(ItemEvent e) 
 						{
 							//if button is selected (on)
-							if (button.isSelected() == true)
+							if (e.getStateChange()==ItemEvent.SELECTED)
 							{
-								JOptionPane.showMessageDialog(null, "Button " + String.valueOf(num) + " is selected");
-								
-								darkcharacter = new ImageIcon(String.valueOf(num)+".png");
-								
-								//for (int a=0; a<=button.getWidth(); a++)
-								//{
-									//for (int b=0; b<=button.getHeight(); b++)
-									//{
-										
-									//}
-								//}
+								button.setIcon(darker);
+								System.out.println("Selected button " + String.valueOf(num+1));
+								state[num] = true;
 							}
+							
 							//if button is unselected (off)
-							if (button.isSelected() == false)
+							if (e.getStateChange()==ItemEvent.DESELECTED)
 							{
-								JOptionPane.showMessageDialog(null, "Button " + String.valueOf(num) + " is is not selected");
+								button.setIcon(character);
+								System.out.println("Deselected button " + String.valueOf(num+1));
+								state[num] = false;
 							}
 						}
-				});
-		}
+					});
+				}
+			} 
+		
+		//catching no image
+		catch (Exception e) 
+		{
+			System.out.println(e);
+		}		
 	}
 }
 
@@ -86,8 +79,12 @@ public class picker
 		Window importclass = new Window();
 		importclass.init();
 		JFrame window = new JFrame();
+		
+		//fix background color
+		window.getContentPane().setForeground(Color.black);
+		window.setTitle("Smash Picker");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setBounds(30, 30, 300, 300);
+		window.setBounds(30, 30, 1000, 450);
 		window.getContentPane().add(importclass);
 		window.setVisible(true);
 	}
