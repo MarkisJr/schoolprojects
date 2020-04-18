@@ -11,31 +11,42 @@ class Window extends JPanel
 	private static final long serialVersionUID = 1L;
 	
 	//button state
-	boolean[] state = new boolean[80];
+	boolean[] buttonstate = new boolean[80];
+	
+	JToggleButton[] button;
 	
 	//making character buttons
-	public void init()
+	public void init(Boolean state)
 	{	
 		try 
 		{
+			if (state == false)
+			{
+				
+			}
+			else if (state == true)
+			{
+				
+			}
+			
 			for (int i=80-1; i>=0; i--)
 			{	
 				//detecting iteration
 				int num = i;
 					
 				//creating button
-				JToggleButton button = new JToggleButton();
-				button.setPreferredSize(new Dimension(75,50));
-				button.setMargin(new Insets(0,0,0,0));
-				button.setBorder(null);
+				button[i] = new JToggleButton();
+				button[i].setPreferredSize(new Dimension(75,50));
+				button[i].setMargin(new Insets(0,0,0,0));
+				button[i].setBorder(null);
 					
 				//setting icon and creating dark icon
 				Icon character = new ImageIcon("characters/" + String.valueOf(i+1) + ".png");
 				Icon darker = new ImageIcon("darker/" + String.valueOf(i+1) + ".png");
-				button.setIcon(character);
+				button[i].setIcon(character);
 				
 				//adding to window pane
-				add(button);
+				add(button[i]);
 				
 				//adding right filler and action buttons
 				if (i == 0)
@@ -47,37 +58,27 @@ class Window extends JPanel
 						filler.setIcon(new ImageIcon("characters/filler.png"));
 						add(filler);
 					}
-					
-					//toggle
-					button.addActionListener(new ActionListener()
-					{
-						public void actionPerformed(ActionEvent e) 
-						{
-							
-						}
-						
-					});
 				}
 				
 				//creating event handler for button
-				button.addItemListener(new ItemListener()
+				button[i].addItemListener(new ItemListener()
 				{		
 					public void itemStateChanged(ItemEvent e) 
 					{
 						//if button is selected (on)
 						if (e.getStateChange()==ItemEvent.SELECTED)
 						{
-							button.setIcon(darker);
+							button[num].setIcon(darker);
 							System.out.println("Selected button " + String.valueOf(num+1));
-							state[num] = true;
+							buttonstate[num] = true;
 						}
 						
 						//if button is unselected (off)
 						if (e.getStateChange()==ItemEvent.DESELECTED)
 						{
-							button.setIcon(character);
+							button[num].setIcon(character);
 							System.out.println("Deselected button " + String.valueOf(num+1));
-							state[num] = false;
+							buttonstate[num] = false;
 						}
 					}
 				});
@@ -122,7 +123,7 @@ class Window extends JPanel
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					
+					init(true);
 				}		
 				
 			});
@@ -131,7 +132,7 @@ class Window extends JPanel
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					
+					init(false);
 				}		
 				
 			});
@@ -153,7 +154,7 @@ public class picker
 	public static void main(String[] args) 
 	{
 		Window importclass = new Window();
-		importclass.init();
+		importclass.init(null);
 		JFrame window = new JFrame();
 		
 		//fix background color
