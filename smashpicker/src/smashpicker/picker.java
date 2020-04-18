@@ -16,18 +16,11 @@ class Window extends JPanel
 	JToggleButton[] button;
 	
 	//making character buttons
-	public void init(Boolean state)
+	public void init()
 	{	
-		try 
-		{
-			if (state == false)
-			{
-				
-			}
-			else if (state == true)
-			{
-				
-			}
+		//try 
+		//{
+			
 			
 			for (int i=80-1; i>=0; i--)
 			{	
@@ -123,7 +116,7 @@ class Window extends JPanel
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					init(true);
+					//init(true);
 				}		
 				
 			});
@@ -132,17 +125,17 @@ class Window extends JPanel
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					init(false);
+					//init(false);
 				}		
 				
 			});
-		} 
+		//} 
 		
 		//catching
-		catch (Exception e) 
-		{
-			System.out.println(e);
-		}		
+		//catch (Exception e) 
+		//{
+			//System.out.println(e);
+		//}		
 	}
 }
 
@@ -154,7 +147,7 @@ public class picker
 	public static void main(String[] args) 
 	{
 		Window importclass = new Window();
-		importclass.init(null);
+		importclass.init();
 		JFrame window = new JFrame();
 		
 		//fix background color
