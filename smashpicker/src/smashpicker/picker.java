@@ -4,7 +4,7 @@ package smashpicker;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import java.util.Random;
+import java.util.Random;
 
 //graphical class
 class Window extends JPanel
@@ -164,27 +164,28 @@ class Window extends JPanel
 			{
 				public void actionPerformed(ActionEvent e)
 				{
-					//Random random = new Random();
+					Random random = new Random();
 					int pool = 0;
-					int[] position = new int[80];
+					int[] position = new int[80+1];
 					
 					for (int i=state.length-1; i>=0; i--)
 					{
 						if (state[i] == true)
 						{
 							pool++;
-							position[pool] = i;
+							position[pool] = i+1;
 						}
 					}
 					
 					System.out.println(pool + " chosen at positions: ");
-					for (int i=position.length-1; i>=0; i--)
+					for (int i=position.length-1; i>0; i--)
 					{
-						System.out.println(position[i]);
+						System.out.println("At arrary indent " + pool + ":" + position[i]);
 					}
 					
 					
-					//int selection = random.nextInt(pool);
+					int selection = random.nextInt(pool);
+					//button[position[selection]].setSelected(false);
 				}
 			});
 		}
