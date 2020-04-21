@@ -4,6 +4,7 @@ package smashpicker;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+//import java.util.Random;
 
 //graphical class
 class Window extends JPanel
@@ -121,7 +122,7 @@ class Window extends JPanel
 			add(start);
 			add(toggleoff);
 			
-			//action listeners for on and off
+			//all buttons on
 			toggleon.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e) 
@@ -140,6 +141,7 @@ class Window extends JPanel
 				
 			});
 			
+			//all buttons off
 			toggleoff.addActionListener(new ActionListener()
 			{
 				public void actionPerformed(ActionEvent e) 
@@ -155,6 +157,35 @@ class Window extends JPanel
 					}
 				}		
 				
+			});
+			
+			//select random character
+			start.addActionListener(new ActionListener() 
+			{
+				public void actionPerformed(ActionEvent e)
+				{
+					//Random random = new Random();
+					int pool = 0;
+					int[] position = new int[80];
+					
+					for (int i=state.length-1; i>=0; i--)
+					{
+						if (state[i] == true)
+						{
+							pool++;
+							position[pool] = i;
+						}
+					}
+					
+					System.out.println(pool + " chosen at positions: ");
+					for (int i=position.length-1; i>=0; i--)
+					{
+						System.out.println(position[i]);
+					}
+					
+					
+					//int selection = random.nextInt(pool);
+				}
 			});
 		}
 		
