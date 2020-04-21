@@ -11,21 +11,25 @@ class Window extends JPanel
 	private static final long serialVersionUID = 1L;
 	
 	//button state
-	boolean[] buttonstate = new boolean[80];
-	
-	JToggleButton[] button;
+	boolean[] state = new boolean[80];
 	
 	//making character buttons
 	public void init()
 	{	
-		//try 
-		//{
-			
+		try 
+		{
+			//array generation
+			JToggleButton[] button = new JToggleButton[80];
+			Icon[] character = new Icon[80];
+			Icon[] darker = new Icon[80];
 			
 			for (int i=80-1; i>=0; i--)
 			{	
 				//detecting iteration
 				int num = i;
+				
+				//setting states TODO: make bin file load previous states
+				state[i] = true;
 					
 				//creating button
 				button[i] = new JToggleButton();
@@ -34,9 +38,9 @@ class Window extends JPanel
 				button[i].setBorder(null);
 					
 				//setting icon and creating dark icon
-				Icon character = new ImageIcon("characters/" + String.valueOf(i+1) + ".png");
-				Icon darker = new ImageIcon("darker/" + String.valueOf(i+1) + ".png");
-				button[i].setIcon(character);
+				character[i] = new ImageIcon("characters/" + String.valueOf(i+1) + ".png");
+				darker[i] = new ImageIcon("darker/" + String.valueOf(i+1) + ".png");
+				button[i].setIcon(character[i]);
 				
 				//adding to window pane
 				add(button[i]);
@@ -61,17 +65,17 @@ class Window extends JPanel
 						//if button is selected (on)
 						if (e.getStateChange()==ItemEvent.SELECTED)
 						{
-							button[num].setIcon(darker);
-							System.out.println("Selected button " + String.valueOf(num+1));
-							buttonstate[num] = true;
+							button[num].setIcon(darker[num]);
+							System.out.println("Deselected button " + String.valueOf(num+1));
+							state[num] = false;
 						}
 						
 						//if button is unselected (off)
 						if (e.getStateChange()==ItemEvent.DESELECTED)
 						{
-							button[num].setIcon(character);
-							System.out.println("Deselected button " + String.valueOf(num+1));
-							buttonstate[num] = false;
+							button[num].setIcon(character[num]);
+							System.out.println("Selected button " + String.valueOf(num+1));
+							state[num] = true;
 						}
 					}
 				});
@@ -88,7 +92,7 @@ class Window extends JPanel
 				}
 			}
 			
-			//creating button
+			//creating function buttons
 			JButton toggleon, toggleoff;
 			toggleon = new JButton();
 			toggleoff = new JButton();
@@ -116,7 +120,16 @@ class Window extends JPanel
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					//init(true);
+					//for loop to cycle through all buttons
+					for (int i=80-1; i>=0; i--)
+					{
+						button[i].setSelected(false);
+						
+					}
+					for (int i=80-1; i>=0; i--)
+					{
+						System.out.print(state[i]);
+					}
 				}		
 				
 			});
@@ -125,17 +138,25 @@ class Window extends JPanel
 			{
 				public void actionPerformed(ActionEvent e) 
 				{
-					//init(false);
+					//for loop to cycle through all buttons
+					for (int i=80-1; i>=0; i--)
+					{
+						button[i].setSelected(true);
+					}
+					for (int i=80-1; i>=0; i--)
+					{
+						System.out.print(state[i]);
+					}
 				}		
 				
 			});
-		//} 
+		}
 		
-		//catching
-		//catch (Exception e) 
-		//{
-			//System.out.println(e);
-		//}		
+		//catching any Exceptions
+		catch (Exception e)
+		{
+			System.out.println(e);
+		}
 	}
 }
 
