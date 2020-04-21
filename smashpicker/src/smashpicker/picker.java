@@ -93,26 +93,32 @@ class Window extends JPanel
 			}
 			
 			//creating function buttons
-			JButton toggleon, toggleoff;
-			toggleon = new JButton();
-			toggleoff = new JButton();
+			JButton toggleon = new JButton();
+			JButton start = new JButton();
+			JButton toggleoff = new JButton();
 			
 			toggleon.setPreferredSize(new Dimension(75,50));
 			toggleon.setMargin(new Insets(0,0,0,0));
 			toggleon.setBorder(null);
+			
+			start.setPreferredSize(new Dimension(75,50));
+			start.setMargin(new Insets(0,0,0,0));
+			start.setBorder(null);
 			
 			toggleoff.setPreferredSize(new Dimension(75,50));
 			toggleoff.setMargin(new Insets(0,0,0,0));
 			toggleoff.setBorder(null);
 			
 			//setting icons
-			Icon[] icon = {new ImageIcon("characters/1#.png"),new ImageIcon("characters/2#.png")};
+			Icon[] icon = {new ImageIcon("characters/1#.png"), new ImageIcon("characters/2#.png"), new ImageIcon("characters/3#.png")};
 			toggleon.setIcon(icon[1]);
+			start.setIcon(icon[2]);
 			toggleoff.setIcon(icon[0]);
 			
 			
 			//adding
 			add(toggleon);
+			add(start);
 			add(toggleoff);
 			
 			//action listeners for on and off
