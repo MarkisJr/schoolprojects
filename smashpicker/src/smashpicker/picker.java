@@ -12,7 +12,7 @@ class Window extends JPanel
 	private static final long serialVersionUID = 1L;
 	
 	//button state
-	boolean[] state = new boolean[80];
+	int[] state = new int[80];
 	
 	//making character buttons
 	public void init()
@@ -24,30 +24,30 @@ class Window extends JPanel
 			Icon[] character = new Icon[80];
 			Icon[] darker = new Icon[80];
 			
-			for (int i=80-1; i>=0; i--)
+			for (int i=79; i>=0; i--)
 			{	
 				//detecting iteration
 				int num = i;
 				
 				//setting states TODO: make bin file load previous states
-				state[i] = true;
+				state[i] = num;
 					
 				//creating button
-				button[i] = new JToggleButton();
-				button[i].setPreferredSize(new Dimension(75,50));
-				button[i].setMargin(new Insets(0,0,0,0));
-				button[i].setBorder(null);
+				button[num] = new JToggleButton();
+				button[num].setPreferredSize(new Dimension(75,50));
+				button[num].setMargin(new Insets(0,0,0,0));
+				button[num].setBorder(null);
 					
 				//setting icon and creating dark icon
-				character[i] = new ImageIcon("characters/" + String.valueOf(i+1) + ".png");
-				darker[i] = new ImageIcon("darker/" + String.valueOf(i+1) + ".png");
-				button[i].setIcon(character[i]);
+				character[num] = new ImageIcon("characters/" + String.valueOf(num+1) + ".png");
+				darker[num] = new ImageIcon("darker/" + String.valueOf(num+1) + ".png");
+				button[num].setIcon(character[num]);
 				
 				//adding to window pane
-				add(button[i]);
+				add(button[num]);
 				
 				//adding right filler and action buttons
-				if (i == 0)
+				if (num == 0)
 				{
 					for (int f=2-1; f>=0; f--)
 					{
@@ -59,30 +59,30 @@ class Window extends JPanel
 				}
 				
 				//creating event handler for button
-				button[i].addItemListener(new ItemListener()
+				button[num].addItemListener(new ItemListener()
 				{		
 					public void itemStateChanged(ItemEvent e) 
 					{
-						//if button is selected (on)
+						//if button is unselected (off)
 						if (e.getStateChange()==ItemEvent.SELECTED)
 						{
 							button[num].setIcon(darker[num]);
 							System.out.println("Deselected button " + String.valueOf(num+1));
-							state[num] = false;
+							state[num] = 0;
 						}
 						
-						//if button is unselected (off)
+						//if button is selected (on)
 						if (e.getStateChange()==ItemEvent.DESELECTED)
 						{
 							button[num].setIcon(character[num]);
 							System.out.println("Selected button " + String.valueOf(num+1));
-							state[num] = true;
+							state[num] = num;
 						}
 					}
 				});
 					
 				//adding left filler	
-				if (i == 8)
+				if (num == 8)
 				{
 					for (int f=2-1; f>=0; f--)
 					{
@@ -130,12 +130,7 @@ class Window extends JPanel
 					//for loop to cycle through all buttons
 					for (int i=80-1; i>=0; i--)
 					{
-						button[i].setSelected(false);
-						
-					}
-					for (int i=80-1; i>=0; i--)
-					{
-						System.out.print(state[i]);
+						button[i].setSelected(false);	
 					}
 				}		
 				
@@ -151,10 +146,6 @@ class Window extends JPanel
 					{
 						button[i].setSelected(true);
 					}
-					for (int i=80-1; i>=0; i--)
-					{
-						System.out.print(state[i]);
-					}
 				}		
 				
 			});
@@ -166,14 +157,14 @@ class Window extends JPanel
 				{
 					Random random = new Random();
 					int pool = 0;
-					int[] position = new int[80+1];
+					int[] position = new int[80];
 					
-					for (int i=state.length-1; i>=0; i--)
+					for (int i=state.length; i>=0; i--)
 					{
-						if (state[i] == true)
+						if (state[i] != 0)
 						{
 							pool++;
-							position[pool] = i+1;
+							position[pool] = state[i];
 						}
 					}
 					
