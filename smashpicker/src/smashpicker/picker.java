@@ -4,6 +4,7 @@ package smashpicker;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.JOptionPane;
 import java.util.Random;
 
 //graphical class
@@ -128,7 +129,7 @@ class Window extends JPanel
 				public void actionPerformed(ActionEvent e) 
 				{
 					//for loop to cycle through all buttons
-					for (int i=80-1; i>=0; i--)
+					for (int i=79; i>=0; i--)
 					{
 						button[i].setSelected(false);	
 					}
@@ -142,7 +143,7 @@ class Window extends JPanel
 				public void actionPerformed(ActionEvent e) 
 				{
 					//for loop to cycle through all buttons
-					for (int i=80-1; i>=0; i--)
+					for (int i=79; i>=0; i--)
 					{
 						button[i].setSelected(true);
 					}
@@ -156,10 +157,11 @@ class Window extends JPanel
 				public void actionPerformed(ActionEvent e)
 				{
 					Random random = new Random();
+					int[]memory = new int[state.length];
 					int pool = 0;
 					int[] position = new int[80];
 					
-					for (int i=state.length; i>=0; i--)
+					for (int i=79; i>=0; i--)
 					{
 						if (state[i] != 0)
 						{
@@ -168,15 +170,36 @@ class Window extends JPanel
 						}
 					}
 					
-					System.out.println(pool + " chosen at positions: ");
-					for (int i=position.length-1; i>0; i--)
+					//storing selected characters to memory TODO: store memory of pool int
+					for (int i=79; i>=0; i--)
 					{
-						System.out.println("At arrary indent " + pool + ":" + position[i]);
+						if (state[i] != 0)
+						{
+							memory[i] = state[i];
+						}
 					}
 					
+					//selection
+					int selection = random.nextInt(pool)+1;
+					JOptionPane.showMessageDialog(null, character[position[selection]]);
 					
-					int selection = random.nextInt(pool);
-					//button[position[selection]].setSelected(false);
+					
+					//animation
+					//for (int i=79; i>=0; i--)
+					//{
+						
+						//if (i == position[selection])
+						//{
+							//System.out.println("Do nothing");
+						//}
+						//else
+						//{
+							//if (button[i].isSelected() == false)
+							//{
+								//button[i].setSelected(true);
+							//}
+						//}
+					//}
 				}
 			});
 		}
@@ -193,7 +216,6 @@ class Window extends JPanel
 
 public class picker 
 {
-
 	public static void main(String[] args) 
 	{
 		Window importclass = new Window();
@@ -208,5 +230,4 @@ public class picker
 		window.getContentPane().add(importclass);
 		window.setVisible(true);
 	}
-
 }
