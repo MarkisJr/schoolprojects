@@ -197,6 +197,7 @@ class Window extends JPanel
 							//if (button[i].isSelected() == false)
 							//{
 								//button[i].setSelected(true);
+								
 							//}
 						//}
 					//}
