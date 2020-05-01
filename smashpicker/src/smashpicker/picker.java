@@ -68,7 +68,6 @@ class Window extends JPanel
 						if (e.getStateChange()==ItemEvent.SELECTED)
 						{
 							button[num].setIcon(darker[num]);
-							System.out.println("Deselected button " + String.valueOf(num+1));
 							state[num] = 0;
 						}
 						
@@ -76,7 +75,6 @@ class Window extends JPanel
 						if (e.getStateChange()==ItemEvent.DESELECTED)
 						{
 							button[num].setIcon(character[num]);
-							System.out.println("Selected button " + String.valueOf(num+1));
 							state[num] = num;
 						}
 					}
@@ -179,28 +177,17 @@ class Window extends JPanel
 						}
 					}
 					
-					//selection
-					int selection = random.nextInt(pool)+1;
-					JOptionPane.showMessageDialog(null, character[position[selection]]);
-					
-					
-					//animation
-					//for (int i=79; i>=0; i--)
-					//{
-						
-						//if (i == position[selection])
-						//{
-							//System.out.println("Do nothing");
-						//}
-						//else
-						//{
-							//if (button[i].isSelected() == false)
-							//{
-								//button[i].setSelected(true);
-								
-							//}
-						//}
-					//}
+					//checking for content
+					if (pool > 0)
+					{
+						//selection
+						int selection = random.nextInt(pool)+1;
+						JOptionPane.showMessageDialog(null, character[position[selection]]);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Please select at least one character");
+					}
 				}
 			});
 		}
@@ -208,7 +195,7 @@ class Window extends JPanel
 		//catching any Exceptions
 		catch (Exception e)
 		{
-			System.out.println(e);
+			JOptionPane.showMessageDialog(null, "Error: " + e);
 		}
 	}
 }
