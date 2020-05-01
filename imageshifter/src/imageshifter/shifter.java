@@ -13,20 +13,24 @@ class Window extends JPanel
 	{
 		try
 		{
+			TextField num = new TextField("Number of files");
+			//TextField dirin = new TextField("Directory input");
+			//TextField dirout = new TextField("Directory output");
 			Button confirm = new Button("Start");
+			add(num);
+			//add (dirin);
+			//add(dirout);
 			add(confirm);
 			
 			confirm.addActionListener(new ActionListener() 
 			{
 				public void actionPerformed(ActionEvent e) 
 				{	
-					for (int i=80; i>=1; i--)
+					for (int i=Integer.parseInt(num.getText()); i>=1; i--)
 					{
-						if(i>3)
-						{
-							File image = new File("C:\\Users\\noahd\\git\\schoolprojects\\smashpicker\\darker\\New folder\\" + String.valueOf(i) + ".png");
-							image.renameTo(new File("C:\\Users\\noahd\\git\\schoolprojects\\smashpicker\\darker\\" + String.valueOf(i+6) + ".png"));
-						}
+						File image = new File("C:\\Users\\noahd\\git\\schoolprojects\\smashpicker\\darker\\source\\" + String.valueOf(i) + ".png");
+						image.renameTo(new File("C:\\Users\\noahd\\git\\schoolprojects\\smashpicker\\darker\\" + "darker" + String.valueOf(i) + ".png"));
+						System.out.println("done file "+ i);
 					}
 				}
 				
