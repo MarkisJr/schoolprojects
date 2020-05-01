@@ -40,8 +40,8 @@ class Window extends JPanel
 				button[num].setBorder(null);
 					
 				//setting icon and creating dark icon
-				character[num] = new ImageIcon(String.valueOf(num+1) + ".png");
-				darker[num] = new ImageIcon("darker" + String.valueOf(num+1) + ".png");
+				character[num] = new ImageIcon("/" + String.valueOf(num+1) + ".png");
+				darker[num] = new ImageIcon("/darker" + String.valueOf(num+1) + ".png");
 				button[num].setIcon(character[num]);
 				
 				//adding to window pane
@@ -54,7 +54,7 @@ class Window extends JPanel
 					{
 						//filler
 						JLabel filler = new JLabel();
-						filler.setIcon(new ImageIcon("filler.png"));
+						filler.setIcon(new ImageIcon("/filler.png"));
 						add(filler);
 					}
 				}
@@ -86,7 +86,7 @@ class Window extends JPanel
 					for (int f=2-1; f>=0; f--)
 					{
 						JLabel filler = new JLabel();
-						filler.setIcon(new ImageIcon("filler.png"));
+						filler.setIcon(new ImageIcon("/filler.png"));
 						add(filler);
 					}
 				}
@@ -110,7 +110,7 @@ class Window extends JPanel
 			toggleoff.setBorder(null);
 			
 			//setting icons
-			Icon[] icon = {new ImageIcon("1#.png"), new ImageIcon("2#.png"), new ImageIcon("3#.png")};
+			Icon[] icon = {new ImageIcon("/1#.png"), new ImageIcon("/2#.png"), new ImageIcon("/3#.png")};
 			toggleon.setIcon(icon[1]);
 			start.setIcon(icon[2]);
 			toggleoff.setIcon(icon[0]);
