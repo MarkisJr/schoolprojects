@@ -25,6 +25,8 @@ class Window extends JPanel
 			Icon[] character = new Icon[80];
 			Icon[] darker = new Icon[80];
 			
+			//path finder
+			
 			for (int i=79; i>=0; i--)
 			{	
 				//detecting iteration
@@ -38,10 +40,11 @@ class Window extends JPanel
 				button[num].setPreferredSize(new Dimension(75,50));
 				button[num].setMargin(new Insets(0,0,0,0));
 				button[num].setBorder(null);
-					
+				
 				//setting icon and creating dark icon
-				character[num] = new ImageIcon("/" + String.valueOf(num+1) + ".png");
-				darker[num] = new ImageIcon("/darker" + String.valueOf(num+1) + ".png");
+				character[num] = new ImageIcon(ResourceLoader.load("characters/" + String.valueOf(num+1) + ".png"));
+				System.out.println(ResourceLoader.load("characters/" + String.valueOf(num+1) + ".png"));
+				darker[num] = new ImageIcon(ResourceLoader.load("darker/" + String.valueOf(num+1) + ".png"));
 				button[num].setIcon(character[num]);
 				
 				//adding to window pane
@@ -54,7 +57,7 @@ class Window extends JPanel
 					{
 						//filler
 						JLabel filler = new JLabel();
-						filler.setIcon(new ImageIcon("/filler.png"));
+						filler.setIcon(new ImageIcon("characters/filler.png"));
 						add(filler);
 					}
 				}
@@ -86,7 +89,7 @@ class Window extends JPanel
 					for (int f=2-1; f>=0; f--)
 					{
 						JLabel filler = new JLabel();
-						filler.setIcon(new ImageIcon("/filler.png"));
+						filler.setIcon(new ImageIcon("characters/filler.png"));
 						add(filler);
 					}
 				}
@@ -110,7 +113,7 @@ class Window extends JPanel
 			toggleoff.setBorder(null);
 			
 			//setting icons
-			Icon[] icon = {new ImageIcon("/1#.png"), new ImageIcon("/2#.png"), new ImageIcon("/3#.png")};
+			Icon[] icon = {new ImageIcon("characters/1#.png"), new ImageIcon("characters/2#.png"), new ImageIcon("characters/3#.png")};
 			toggleon.setIcon(icon[1]);
 			start.setIcon(icon[2]);
 			toggleoff.setIcon(icon[0]);
