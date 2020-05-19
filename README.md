@@ -13,4 +13,4 @@ Everything related to school projects:
 3. Smash Picker
 	A home project designed to select a random Super Smash Bros character from a pre-selected pool
 	
-	[picker.java](./smashpicker/src)
+	[picker.java](./smashpicker/src/smashpicker)
