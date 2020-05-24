@@ -8,9 +8,8 @@ class Window extends JPanel
 {
 	private static final long serialVersionUID = 1L;
 	
-	Integer guesses = 0;
-	Integer number = 0;
-	Integer getrandom = 0;
+	//Defining variables
+	Integer guesses = 0, number = 0, getrandom = 0;
 	
 	public void init()
 	{
@@ -43,6 +42,11 @@ class Window extends JPanel
 					//Get text and covert it to int
 					number = Integer.parseInt(input.getText());
 					
+					if (number > 100)
+					{
+						JOptionPane.showMessageDialog(null, "That number is not within the range!");
+						return;
+					}
 					//If the game has not been started, select a new random number
 					if (getrandom == 0)
 					{	
@@ -87,7 +91,7 @@ class Window extends JPanel
 				//Catching unrelated characters
 				catch(NumberFormatException error)
 				{
-					JOptionPane.showMessageDialog(null, "Only numbers are accepted");
+					JOptionPane.showMessageDialog(null, "Only whole numbers are accepted");
 				}
 			}		
 		});
