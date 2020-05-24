@@ -57,7 +57,7 @@ class Window extends JPanel
 				//Catching unrelated characters
 				catch(NumberFormatException error)
 				{
-					JOptionPane.showMessageDialog(null, "");
+					JOptionPane.showMessageDialog(null, "\"" + input.getText() + "\" is not a measurement of hours...");
 				}
 			}		
 		});
