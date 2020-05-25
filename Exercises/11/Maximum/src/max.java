@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -8,25 +9,36 @@ class Window extends JPanel
 	
 	//Defining variables
 	Double a = 0d, b = 0d, c = 0d;
-	Double[] temp = new Double[3];
+	String highest = "";
 	
 	public void init()
 	{
-		//Title
-		JLabel title = new JLabel("Please enter the three values");
+		//Labels
+		JLabel 
+			title = new JLabel("<html><center>Please enter the three values</center></html>"),
+			labela = new JLabel("A: "),
+			labelb = new JLabel("B: "),
+			labelc = new JLabel("C: ")
+		;
 		//User input
-		JTextField fielda = new JTextField(5), fieldb = new JTextField(5), fieldc = new JTextField(5);
+		JTextField fielda = new JTextField(3), fieldb = new JTextField(3), fieldc = new JTextField(3);
 		//Buttons
 		JButton start = new JButton("Guess"), reset = new JButton("Reset");
+		start.setPreferredSize(new Dimension(100, 26));
+		reset.setPreferredSize(new Dimension(100, 26));
 		//Dialogue
 		JLabel result = new JLabel();
 		
 		//Add elements to frame
 		add(title);
+		add(labela);
 		add(fielda);
+		add(labelb);
 		add(fieldb);
+		add(labelc);
 		add(fieldc);
 		add(start);
+		add(reset);
 		add(result);
 		
 		//Number comparison for max
@@ -41,11 +53,23 @@ class Window extends JPanel
 					b = Double.parseDouble(fieldb.getText());
 					c = Double.parseDouble(fieldc.getText());
 					
-					if (a > b)
-						temp[0] = a;
-					if (b > c)
-						temp[1] = b;
+					//Checking if all values are the same
+					if ((a.equals(b)) && (a.equals(c)))
+					{
+						JOptionPane.showMessageDialog(null, "All three values are of the same value");
+						return;
+					}
 					
+					//Checking what value is the max
+					if (Math.max(a, Math.max(b, c)) == a)
+						highest = "A";
+					else if (Math.max(a, Math.max(b, c)) == b)
+						highest = "B";
+					else
+						highest = "C";
+					
+					//Print the max value
+					result.setText("The highest number is value " + highest + " at " + String.valueOf(Math.max(a, Math.max(b, c))));					
 				}
 				//Catching unrelated characters
 				catch(NumberFormatException error)
@@ -60,7 +84,10 @@ class Window extends JPanel
 		{
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				
+				fielda.setText("");
+				fieldb.setText("");
+				fieldc.setText("");
+				result.setText("");
 			}
 		});
 	}
@@ -74,9 +101,9 @@ public class max
 		importclass.init();
 		JFrame window = new JFrame();
 		
-		window.setTitle("Guess the Number");
+		window.setTitle("Maximum Number");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setBounds(30, 30, 300, 130);
+		window.setBounds(30, 30, 400, 140);
 		window.setResizable(false);
 		window.getContentPane().add(importclass);
 		window.setVisible(true);
