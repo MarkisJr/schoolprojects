@@ -49,8 +49,8 @@ class Window extends JPanel
 					//Hourly rate if worked greater than 35 hours
 					if (hours >= 35)
 					{
-						salary = hours*25;
-						result.setText("At a rate of $25/h, the worker's salary is $" + salary);
+						salary = 35*15+(hours-35)*25;
+						result.setText("<html><center>At a rate of $15/h with $25/h excess, <br>the worker's salary is $" + salary + "</center></html>");
 						start.setEnabled(false);
 					}
 				}
