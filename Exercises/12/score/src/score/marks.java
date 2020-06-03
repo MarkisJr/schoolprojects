@@ -117,7 +117,7 @@ public class marks
 		importclass.init();
 		JFrame window = new JFrame();
 		
-		window.setTitle("Wage Calculator");
+		window.setTitle("Grade calculator");
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setBounds(30, 30, 300, 200);
 		window.setResizable(false);
