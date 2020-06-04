@@ -80,13 +80,13 @@ class Window extends JPanel
 				if (winner == A)
 					output.setText("The winner is candidate A with " + winner + " vote(s)!");
 				
-				else if (winner == B)
+				if (winner == B)
 					output.setText("The winner is candidate B with " + winner + " vote(s)!");
 				
-				else if (winner == C)
+				if (winner == C)
 					output.setText("The winner is candidate C with " + winner + " vote(s)!");
 				
-				else if (winner == D)
+				if (winner == D)
 					output.setText("The winner is candidate D with " + winner + " vote(s)!");
 			}		
 		});
