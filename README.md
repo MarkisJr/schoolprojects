@@ -14,3 +14,7 @@ Everything related to school projects:
 	A home project designed to select a random Super Smash Bros character from a pre-selected pool
 	
 	[picker.java](./smashpicker/src/smashpicker)
+4. Exercises
+	A collection of small projects for learning various applications of "if" statements
+	
+	[Exercises](./Exercises)
