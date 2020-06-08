@@ -88,6 +88,9 @@ class Window extends JPanel
 				
 				if (winner == D)
 					output.setText("The winner is candidate D with " + winner + " vote(s)!");
+				
+				if ((A == B) || (B == C) || (C == D) || (A == C) || (A == D) || (B == D))
+					output.setText("There was a tie! There are no winners...");
 			}		
 		});
 		

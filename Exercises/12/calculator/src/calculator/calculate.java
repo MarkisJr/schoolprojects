@@ -1,10 +1,11 @@
 package calculator;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 class Window extends JPanel
 {
@@ -15,10 +16,10 @@ class Window extends JPanel
 	public void init()
 	{
 		//Title
-		JLabel title = new JLabel("<html><center>Please enter values A and B<br></center></html>");
+		JLabel title = new JLabel("    Please enter values A and B    ");
 		
-		JTextField a = new JTextField(10);
-		JTextField b = new JTextField(10);
+		JTextField a = new JTextField(12);
+		JTextField b = new JTextField(12);
 
 		//Buttons
 		JButton multiply = new JButton("X");
@@ -27,6 +28,11 @@ class Window extends JPanel
 		JButton subtract = new JButton("-");
 		JButton calculate = new JButton("Calculate");
 		JButton reset = new JButton("Reset");
+		
+		multiply.setPreferredSize(new Dimension(50, 26));
+		devide.setPreferredSize(new Dimension(50, 26));
+		add.setPreferredSize(new Dimension(50, 26));
+		subtract.setPreferredSize(new Dimension(50, 26));
 		
 		//Dialogue
 		JLabel output = new JLabel();
@@ -43,48 +49,38 @@ class Window extends JPanel
 		add(reset);
 		add(output);
 		
-		try
-		{
-			a.getDocument().addDocumentListener(new DocumentListener()
+
+		a.addKeyListener(new KeyAdapter()
 			{
-				public void changedUpdate(DocumentEvent e)
+				public void keyTyped(KeyEvent e)
 				{
-					update();
-				}
-
-				public void insertUpdate(DocumentEvent arg0) 
-				{
-					update();		
-				}
-
-				public void removeUpdate(DocumentEvent arg0) 
-				{
-					update();
-				}
-				public void update()
-				{
-					A = Double.parseDouble(a.getText());
-					System.out.println(A);
+					char c = e.getKeyChar();
+					if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE))
+						e.consume();
 				}
 			});
-			b.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					B = Double.parseDouble(b.getText());
-					System.out.println(A);
-				}
-			});
-		}
-		catch (NumberFormatException e)
+			
+		b.addKeyListener(new KeyAdapter()
 		{
-			JOptionPane.showMessageDialog(null, "You cannot have letters");
+			public void keyTyped(KeyEvent e)
+			{
+				char c = e.getKeyChar();
+				if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE))
+					e.consume();
+			}
+		});
+		
+		
+		{
+			
 		}
 		
 		multiply.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				A = Double.parseDouble(a.getText());
+				B = Double.parseDouble(b.getText());
 				product = A*B;
 				output.setText(String.valueOf(product));
 			}		
@@ -93,6 +89,8 @@ class Window extends JPanel
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				A = Double.parseDouble(a.getText());
+				B = Double.parseDouble(b.getText());
 				product = A/B;
 				output.setText(String.valueOf(product));
 			}		
@@ -101,6 +99,8 @@ class Window extends JPanel
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				A = Double.parseDouble(a.getText());
+				B = Double.parseDouble(b.getText());
 				product = A+B;
 				output.setText(String.valueOf(product));
 			}		
@@ -109,6 +109,8 @@ class Window extends JPanel
 		{
 			public void actionPerformed(ActionEvent e) 
 			{
+				A = Double.parseDouble(a.getText());
+				B = Double.parseDouble(b.getText());
 				product = A-B;
 				output.setText(String.valueOf(product));
 			}		
